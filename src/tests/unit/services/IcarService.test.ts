@@ -42,4 +42,11 @@ describe('Testando a camada Service', () => {
       expect(error).to.be.instanceOf(ZodError);
     })
   });
+
+  describe('Buscando dados de um carro especifico', () => {
+    it('Testando se os dados são retornados com sucesso', async () => {
+      const responseCreate = await carService.readOne('63582c16143d597f738567a7');
+      expect(responseCreate).to.be.deep.equal(icarMockReceves);
+    })
+  })
 });

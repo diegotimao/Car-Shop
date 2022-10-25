@@ -19,4 +19,30 @@ const icarMockReceves: ICar & { _id: string } = {
 	seatsQty: 2,
 }
 
-export { icarMockSubmit, icarMockReceves }
+
+type icarMockWidth = {
+  _id: string,
+  status: boolean,
+  model: string,
+  year: number,
+  color: string,
+  buyValue: number,
+  doorsQty: number,
+  seatsQty: number,
+}
+
+
+const icarMocKListen: icarMockWidth[] = [
+	{
+		_id: "6358577eafa164088865b5b7",
+    status: true,
+		model: "Ferrari Maranello",
+		year: 1963,
+		color: "red",
+		buyValue: 3500000,
+		doorsQty: 2,
+		seatsQty: 2,
+	}
+]
+
+export { icarMockSubmit, icarMockReceves, icarMocKListen }

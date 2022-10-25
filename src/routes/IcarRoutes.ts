@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import ICarController from '../controllers/ICar';
 import IcarService from '../services/ICar';
-import ICarModel from '../models/ICar';
+import ICarModel from '../models/ICarModel';
 
 const route = Router();
 

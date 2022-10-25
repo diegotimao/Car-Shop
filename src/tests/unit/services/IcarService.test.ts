@@ -2,7 +2,7 @@ import * as sinon from 'sinon';
 import { ErrorTypes } from '../../../errors/catalog';
 import CarModel from '../../../models/ICarModel';
 import chai from 'chai';
-import { icarMockReceves, icarMockSubmit } from '../../mocks/IcarsMock';
+import { icarMockReceves, icarMockSubmit, icarMocKListen } from '../../mocks/IcarsMock';
 import IcarService from '../../../services/ICar';
 import { ZodError } from 'zod';
 
@@ -19,6 +19,7 @@ describe('Testando a camada Service', () => {
     sinon
       .stub(carModel, 'readOne').onCall(0).resolves(icarMockReceves)
       .onCall(1).resolves(null)
+    sinon.stub(carModel, 'read').resolves(icarMocKListen)
   });
 
   after(()=>{
@@ -58,6 +59,13 @@ describe('Testando a camada Service', () => {
       }
 
       expect(error.message).to.be.deep.equal(ErrorTypes.EntityNotFound)
+    })
+  });
+
+  describe('Buscando todos os dados', () => {
+    it('Deve retornar um array com todos os objetos cadastrado no banco', async () => {
+      const responseCars = await carService.read();
+      expect(responseCars).to.be.deep.equal(icarMocKListen)
     })
   })
 });

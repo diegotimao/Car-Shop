@@ -24,6 +24,11 @@ class IcarService implements IService<ICar> {
     if (!cars) throw new Error(ErrorTypes.EntityNotFound);
     return cars;
   }
+
+  public async read(): Promise<ICar[]> {
+    const responseCars = await this._icar.read();
+    return responseCars;
+  } 
 }
 
 export default IcarService;

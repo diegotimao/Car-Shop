@@ -9,4 +9,9 @@ export default class ICarController {
     const response = await this._service.create(req.body);
     return res.status(201).json(response);
   }
+
+  public async readOne(req: Request, res: Response<ICar | null>) {
+    const response = await this._service.readOne(req.params.id);
+    return res.status(200).json(response);
+  }
 }

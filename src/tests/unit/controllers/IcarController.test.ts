@@ -1,7 +1,7 @@
 import * as sinon from 'sinon';
 import chai from 'chai';
 import { NextFunction, Response, Request } from 'express';
-import { icarMockReceves, icarMockSubmit } from '../../mocks/IcarsMock';
+import { icarMockReceves, icarMockSubmit, icarMocKListen } from '../../mocks/IcarsMock';
 import ICarController from '../../../controllers/ICar';
 import IcarService from '../../../services/ICar';
 import CarModel from '../../../models/ICarModel';
@@ -22,7 +22,7 @@ describe('Testando a camada Controller', () => {
       .stub(icarService, 'create').resolves(icarMockSubmit);
     sinon
       .stub(icarService, 'readOne').resolves(icarMockSubmit);
-
+    sinon.stub(icarService, 'read').resolves(icarMocKListen);
 
     res.status = sinon.stub().returns(res);
     res.json = sinon.stub().returns(res);
@@ -49,6 +49,15 @@ describe('Testando a camada Controller', () => {
 
       expect((res.status as sinon.SinonStub).calledWith(200)).to.be.true;
       expect((res.json as sinon.SinonStub).calledWith(icarMockSubmit)).to.be.true;
+    })
+  })
+
+  describe('Deve retornar todos os carros cadastrados', () => {
+    it('Verifica se retorna um array com todos os objetos cadastrados', async () => {
+      await icarController.read(req, res);
+
+      expect((res.status as sinon.SinonStub).calledWith(200)).to.be.true;
+      expect((res.json as sinon.SinonStub).calledWith(icarMocKListen)).to.be.true;
     })
   })
 

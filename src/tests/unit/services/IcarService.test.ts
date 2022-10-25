@@ -47,6 +47,17 @@ describe('Testando a camada Service', () => {
     it('Testando se os dados são retornados com sucesso', async () => {
       const responseCreate = await carService.readOne('63582c16143d597f738567a7');
       expect(responseCreate).to.be.deep.equal(icarMockReceves);
+    });
+
+    it('Testa que não é possível buscar os dados com um id inexistente', async () => {
+      let error;
+      try {
+        await carService.readOne('63582c16143d597f738567a7');
+      } catch (err: any) {
+        error = err;
+      }
+
+      expect(error.message).to.be.deep.equal(ErrorTypes.EntityNotFound)
     })
   })
 });

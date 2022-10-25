@@ -40,6 +40,16 @@ describe('Testando a camada Controller', () => {
       expect((res.status as sinon.SinonStub).calledWith(201)).to.be.true;
       expect((res.json as sinon.SinonStub).calledWith(icarMockSubmit)).to.be.true
     });
+  });
+
+  describe('Buscar os dados de um carro', () => {
+    it('É verificado se rotarna os dados de um carro passando um id', async () => {
+      req.params = { id: icarMockReceves._id };
+      await icarController.readOne(req, res);
+
+      expect((res.status as sinon.SinonStub).calledWith(200)).to.be.true;
+      expect((res.json as sinon.SinonStub).calledWith(icarMockSubmit)).to.be.true;
+    })
   })
 
 });

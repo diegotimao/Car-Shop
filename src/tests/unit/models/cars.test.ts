@@ -2,7 +2,8 @@ import * as sinon from 'sinon';
 import chai from 'chai';
 import { Model } from 'mongoose';
 import CarModel from '../../../models/ICarModel';
-import { icarMockReceves, icarMockSubmit, icarMocKListen } from '../../mocks/IcarsMock';
+import { icarMockReceves, icarMockSubmit, icarMocKListen, icarMockUpdatedSubmit, icarMockUpdatedExpect } from '../../mocks/IcarsMock';
+import { ErrorTypes } from '../../../errors/catalog';
 
 const { expect } = chai;
 
@@ -14,6 +15,7 @@ describe('Camada model Icar', () => {
     sinon.stub(Model, 'create').resolves(icarMockReceves);
     sinon.stub(Model, 'findOne').resolves(icarMockReceves);
     sinon.stub(Model, 'find').resolves(icarMocKListen);
+    sinon.stub(Model, 'findByIdAndUpdate').resolves(icarMockUpdatedExpect)
   });
 
   after(()=>{
@@ -43,9 +45,24 @@ describe('Camada model Icar', () => {
   })
 
   describe('Buscando todos os objetos do banco', () => {
-    it('Retorn um array', async () => {
+    it('Deve retornar um array', async () => {
       const responseCar = await carModel.read();
       expect(responseCar).to.be.deep.equal(icarMocKListen)
-    })
+    });
+  });
+
+  describe('Verifica se é possivel atualizar os dados', () => {
+    it('Deve atualizar os dados com sucesso', async () => {
+      const icarUpdated = await carModel.update('6358fc9dae42019707e819ac', icarMockUpdatedSubmit);
+      expect(icarUpdated).to.be.deep.equal(icarMockUpdatedExpect)
+    });
+
+    it('Verifica que não é possível atualizar os dados com id incorreto', async () => {
+      try {
+        await carModel.update('12555221', icarMockUpdatedSubmit);
+      } catch (error: any) {
+        expect(error.message).to.be.eq(ErrorTypes.InvalidMongoId);
+      }
+    });
   })
 });

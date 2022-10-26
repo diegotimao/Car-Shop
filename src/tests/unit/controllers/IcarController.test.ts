@@ -1,7 +1,7 @@
 import * as sinon from 'sinon';
 import chai from 'chai';
 import { NextFunction, Response, Request } from 'express';
-import { icarMockReceves, icarMockSubmit, icarMocKListen } from '../../mocks/IcarsMock';
+import { icarMockReceves, icarMockSubmit, icarMocKListen, icarMockUpdatedExpect, icarMockUpdatedSubmit } from '../../mocks/IcarsMock';
 import ICarController from '../../../controllers/ICar';
 import IcarService from '../../../services/ICar';
 import CarModel from '../../../models/ICarModel';
@@ -23,6 +23,7 @@ describe('Testando a camada Controller', () => {
     sinon
       .stub(icarService, 'readOne').resolves(icarMockSubmit);
     sinon.stub(icarService, 'read').resolves(icarMocKListen);
+    sinon.stub(icarService, 'update').resolves(icarMockUpdatedExpect);
 
     res.status = sinon.stub().returns(res);
     res.json = sinon.stub().returns(res);
@@ -58,6 +59,18 @@ describe('Testando a camada Controller', () => {
 
       expect((res.status as sinon.SinonStub).calledWith(200)).to.be.true;
       expect((res.json as sinon.SinonStub).calledWith(icarMocKListen)).to.be.true;
+    })
+  })
+
+  describe('Verifica se é possivel atualizar os dados', () => {
+    it('Deve atualizar os dados com sucesso', async () => {
+      req.params = { id: icarMockUpdatedExpect._id };
+      req.body = icarMockUpdatedSubmit;
+      await icarController.updated(req, res);
+
+      expect((res.status as sinon.SinonStub).calledWith(200)).to.be.true;
+      expect((res.json as sinon.SinonStub).calledWith(icarMockUpdatedExpect)).to.be.true;
+
     })
   })
 

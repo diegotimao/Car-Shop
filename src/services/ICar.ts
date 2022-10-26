@@ -39,6 +39,11 @@ class IcarService implements IService<ICar> {
     if (!responseUpdated) throw new Error(ErrorTypes.EntityNotFound);
 
     return responseUpdated;
+  } 
+
+  public async delete(_id: string): Promise<ICar | null> {
+    const response = await this._icar.delete(_id);
+    return response;
   }
 }
 

@@ -28,7 +28,18 @@ class IcarService implements IService<ICar> {
   public async read(): Promise<ICar[]> {
     const responseCars = await this._icar.read();
     return responseCars;
-  } 
+  }
+
+  public async update(_id: string, obj: unknown): Promise<ICar> {
+    const parsed = ICarSchema.safeParse(obj);
+
+    if (!parsed.success) throw parsed.error;
+
+    const responseUpdated = await this._icar.update(_id, parsed.data);
+    if (!responseUpdated) throw new Error(ErrorTypes.EntityNotFound);
+
+    return responseUpdated;
+  }
 }
 
 export default IcarService;

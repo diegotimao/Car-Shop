@@ -45,4 +45,40 @@ const icarMocKListen: icarMockWidth[] = [
 	}
 ]
 
-export { icarMockSubmit, icarMockReceves, icarMocKListen }
+const icarMockUpdatedSubmit: ICar = {
+    model: "Maranello",
+    year: 1963,
+    color: "black",
+    buyValue: 3500000,
+    seatsQty: 2,
+    doorsQty: 2
+}
+
+
+type IcarMockUpadetedExpect = {
+  _id: string,
+	model: string,
+	year: number,
+	color: string,
+	buyValue: number,
+	doorsQty: number,
+	seatsQty: number
+}
+
+const icarMockUpdatedExpect: IcarMockUpadetedExpect = {
+	_id: "6358fc9dae42019707e819ac",
+	model: "Maranello",
+	year: 1963,
+	color: "black",
+	buyValue: 3500000,
+	doorsQty: 2,
+	seatsQty: 2
+}
+
+export {
+  icarMockSubmit,
+  icarMockReceves, 
+  icarMocKListen,
+  icarMockUpdatedSubmit,
+  icarMockUpdatedExpect
+}

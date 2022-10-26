@@ -2,7 +2,7 @@ import * as sinon from 'sinon';
 import { ErrorTypes } from '../../../errors/catalog';
 import CarModel from '../../../models/ICarModel';
 import chai from 'chai';
-import { icarMockReceves, icarMockSubmit, icarMocKListen } from '../../mocks/IcarsMock';
+import { icarMockReceves, icarMockSubmit, icarMocKListen, icarMockUpdatedExpect, icarMockUpdatedSubmit } from '../../mocks/IcarsMock';
 import IcarService from '../../../services/ICar';
 import { ZodError } from 'zod';
 
@@ -18,8 +18,9 @@ describe('Testando a camada Service', () => {
       .stub(carModel, 'create').resolves(icarMockReceves);
     sinon
       .stub(carModel, 'readOne').onCall(0).resolves(icarMockReceves)
-      .onCall(1).resolves(null)
-    sinon.stub(carModel, 'read').resolves(icarMocKListen)
+      .onCall(1).resolves(null);
+    sinon.stub(carModel, 'read').resolves(icarMocKListen);
+    sinon.stub(carModel, 'update').onCall(0).resolves(icarMockUpdatedExpect)
   });
 
   after(()=>{
@@ -67,5 +68,23 @@ describe('Testando a camada Service', () => {
       const responseCars = await carService.read();
       expect(responseCars).to.be.deep.equal(icarMocKListen)
     })
+  });
+
+  describe('Verifica se é possivel atualizar os dados', () => {
+    it('Deve atualizar os dados com sucesso', async () => {
+      const responseUpdated = await carService.update('6358fc9dae42019707e819ac', icarMockUpdatedSubmit);
+      expect(responseUpdated).to.be.deep.equal(icarMockUpdatedExpect);
+    });
+
+    it('Verifica que não é possivel atualizar os dados com um id incorreto', async () => {
+      let err;
+      try {
+        await carService.update('125466', icarMockUpdatedSubmit);
+      } catch (error: any) {
+        err = error;
+      }
+
+      expect(err.message).to.be.equal(ErrorTypes.EntityNotFound);
+    });
   })
 });

@@ -25,4 +25,9 @@ export default class ICarController {
 
     return res.status(200).json(response);
   }
+
+  public async delete(req: Request, res: Response) {
+    await this._service.delete(req.params.id);
+    return res.status(204).json({});
+  }
 }

@@ -1,4 +1,5 @@
 import { isValidObjectId, Model, UpdateQuery } from 'mongoose';
+import { ErrorTypes } from '../errors/catalog';
 import { IModel } from '../interfaces/IModel';
 
 abstract class MongoModel<T> implements IModel<T> {
@@ -33,7 +34,10 @@ abstract class MongoModel<T> implements IModel<T> {
 
   public async delete(_id: string): Promise<T | null> {
     if (!isValidObjectId(_id)) throw Error('InvalidMongoId');
+    const existCar = await this._model.findById(_id);
 
+    if (!existCar) throw new Error(ErrorTypes.EntityNotFound);
+    
     return this._model.findByIdAndDelete({ _id });
   }
 }

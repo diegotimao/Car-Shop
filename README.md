@@ -20,7 +20,7 @@ Api Backend desenvolvida em TypeScript utilizando Docker, arquiteturação do c�
 
 | Parâmetro   | Tipo       | Descrição                           |
 | :---------- | :--------- | :---------------------------------- |
-| `api_key` | `string` | **Obrigatório**. A chave da sua API |
+| `cars` | `string` | **Obrigatório**. A chave da sua API |
 
 #### Retorna um car do Banco de dados
 
@@ -30,9 +30,22 @@ Api Backend desenvolvida em TypeScript utilizando Docker, arquiteturação do c�
 
 | Parâmetro   | Tipo       | Descrição                                   |
 | :---------- | :--------- | :------------------------------------------ |
+| `cars` | `string` | **Obrigatório**. A chave da sua API |
 | `id`      | `string` | **Obrigatório**. O ID do item que você quer |
 
 #### Atualiza um cars no Banco de dados
+
+
+#### Retorna um car do Banco de dados
+
+```http
+  POST /cars
+```
+
+| Parâmetro   | Tipo       | Descrição                                   |
+| :---------- | :--------- | :------------------------------------------ |
+| `cars` | `string` | **Obrigatório**. A chave da sua API |
+
 
 ```http
   PUT /cars/${id}
@@ -40,6 +53,7 @@ Api Backend desenvolvida em TypeScript utilizando Docker, arquiteturação do c�
 
 | Parâmetro   | Tipo       | Descrição                                   |
 | :---------- | :--------- | :------------------------------------------ |
+| `cars` | `string` | **Obrigatório**. A chave da sua API |
 | `id`      | `string` | **Obrigatório**. O ID do item que você quer |
 
 #### Deleta um car no Banco de dados
@@ -50,4 +64,5 @@ Api Backend desenvolvida em TypeScript utilizando Docker, arquiteturação do c�
 
 | Parâmetro   | Tipo       | Descrição                                   |
 | :---------- | :--------- | :------------------------------------------ |
+| `cars` | `string` | **Obrigatório**. A chave da sua API |
 | `id`      | `string` | **Obrigatório**. O ID do item que você quer |

@@ -33,10 +33,7 @@ Api Backend desenvolvida em TypeScript utilizando Docker, arquiteturação do c�
 | `cars` | `string` | **Obrigatório**. A chave da sua API |
 | `id`      | `string` | **Obrigatório**. O ID do item que você quer |
 
-#### Atualiza um cars no Banco de dados
-
-
-#### Retorna um car do Banco de dados
+#### Cria um cars do Banco de dados
 
 ```http
   POST /cars
@@ -46,6 +43,7 @@ Api Backend desenvolvida em TypeScript utilizando Docker, arquiteturação do c�
 | :---------- | :--------- | :------------------------------------------ |
 | `cars` | `string` | **Obrigatório**. A chave da sua API |
 
+#### Atualiza um cars no Banco de dados
 
 ```http
   PUT /cars/${id}

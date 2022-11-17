@@ -1,10 +1,53 @@
-# :construction: README em construção ! :construction:
-<!-- Olá, Tryber!
-Esse é apenas um arquivo inicial para o README do seu projeto.
-É essencial que você preencha esse documento por conta própria, ok?
-Não deixe de usar nossas dicas de escrita de README de projetos, e deixe sua criatividade brilhar!
-:warning: IMPORTANTE: você precisa deixar nítido:
-- quais arquivos/pastas foram desenvolvidos por você; 
-- quais arquivos/pastas foram desenvolvidos por outra pessoa estudante;
-- quais arquivos/pastas foram desenvolvidos pela Trybe.
--->
+
+# Car Shop
+
+Api Backend desenvolvida em TypeScript utilizando Docker, arquiteturação do código seguindo o modelo MSC e criação de APIs RESTful com CRUD completo.
+
+## Stack utilizada
+
+**Back-end:** Node, Express, TypeScript, MongoDB, Mongoose, Docker.
+
+**Testes de Integração:** Chai, Mocha.
+
+
+## Documentação da API
+
+#### Retorna todos os cars
+
+```http
+  GET /cars
+```
+
+| Parâmetro   | Tipo       | Descrição                           |
+| :---------- | :--------- | :---------------------------------- |
+| `api_key` | `string` | **Obrigatório**. A chave da sua API |
+
+#### Retorna um car do Banco de dados
+
+```http
+  GET /cars/${id}
+```
+
+| Parâmetro   | Tipo       | Descrição                                   |
+| :---------- | :--------- | :------------------------------------------ |
+| `id`      | `string` | **Obrigatório**. O ID do item que você quer |
+
+#### Atualiza um cars no Banco de dados
+
+```http
+  PUT /cars/${id}
+```
+
+| Parâmetro   | Tipo       | Descrição                                   |
+| :---------- | :--------- | :------------------------------------------ |
+| `id`      | `string` | **Obrigatório**. O ID do item que você quer |
+
+#### Deleta um car no Banco de dados
+
+```http
+  DELETE /cars/${id}
+```
+
+| Parâmetro   | Tipo       | Descrição                                   |
+| :---------- | :--------- | :------------------------------------------ |
+| `id`      | `string` | **Obrigatório**. O ID do item que você quer |

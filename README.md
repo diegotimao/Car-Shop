@@ -5,7 +5,7 @@ Api Backend desenvolvida em TypeScript utilizando Docker, arquiteturação do c�
 
 ## Stack utilizada
 
-**Back-end:** Node, Express, TypeScript, MongoDB, Mongoose, Docker.
+**Back-end:** Node, Express, TypeScript, MongoDB, Mongoose, Docker, JWT/Autenticação.
 
 **Testes de Integração:** Chai, Mocha.
 
